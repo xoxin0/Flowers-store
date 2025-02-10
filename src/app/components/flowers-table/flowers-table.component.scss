@@ -1,0 +1,15 @@
+// 6. Стили таблицы (flower-table.component.less)
+.table {
+  width: 100%;
+  border-collapse: collapse;
+
+  tui-td, tui-th {
+    padding: 1rem;
+    text-align: left;
+    border-bottom: 1px solid var(--tui-base-03);
+  }
+
+  tui-tr:hover {
+    background: var(--tui-base-02);
+  }
+}

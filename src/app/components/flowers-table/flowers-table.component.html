@@ -1,0 +1,25 @@
+<table tuiTable
+       class="table"
+       [columns]="columns"
+>
+
+  <thead tuiThead>
+  <tr tuiThGroup>
+    <th tuiTh>Название</th>
+    <th tuiTh>Цвет</th>
+    <th tuiTh>Цена</th>
+  </tr>
+
+  </thead>
+  <tbody tuiTbody [data]="flowers">
+
+  <tr *ngFor="let flower of flowers" tuiTr>
+    <td tuiTd>{{ flower.name }}</td>
+    <td tuiTd>
+      {{flower.color}}
+    </td>
+    <td tuiTd>{{ flower.price | currency }}</td>
+  </tr>
+
+  </tbody>
+</table>

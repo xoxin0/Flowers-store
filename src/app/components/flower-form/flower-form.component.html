@@ -1,0 +1,65 @@
+<header class="header-flower-form">
+
+  <a class="flower-table-link" routerLink="/flowers-table">
+    <button
+      size="s"
+      tuiButton
+      type="button"
+      class="flower-table-link-button"
+    >
+      Таблица цветов
+    </button>
+  </a>
+
+</header>
+
+<div id="form">
+  <div class="form-block">
+
+    <form
+      tuiAppearance="floating"
+      tuiCardLarge
+      tuiForm="m"
+      [formGroup]="flowerForm"
+      [style.max-width.rem]="32"
+    >
+      <header tuiHeader>
+        <h2 tuiTitle>
+          Добавление цветов
+        </h2>
+      </header>
+
+      <tui-textfield class="form-price">
+        <label for="price" tuiLabel>Price:</label>
+
+        <input id="price"
+               formControlName="price"
+               tuiInputNumber
+               [min]="0"
+               [prefix]="'USD' | tuiCurrency"
+        />
+      </tui-textfield>
+
+      <tui-textfield class="form-color">
+        <label for="color">Color:</label>
+
+        <input id="color" type="text" placeholder="red" formControlName="color">
+      </tui-textfield>
+
+      <tui-textfield class="form-name">
+        <label for="name">Name:</label>
+        <input id="name" type="text" placeholder="Rose" formControlName="name">
+      </tui-textfield>
+
+        <button
+          tuiButton
+          type="submit"
+          class="button-submit"
+          (click)="create()"
+        >
+          Submit
+        </button>
+
+    </form>
+  </div>
+</div>
