@@ -1,25 +1,37 @@
-<table tuiTable
-       class="table"
-       [columns]="columns"
->
+<div class="container">
+  <div
+    tuiAppearance="floating"
+    tuiCardLarge
+    class="flower-card"
+    *ngFor="let flower of flowers$ | async"
+  >
+    <header tuiHeader>
+      <h1 tuiTitle>
+        {{ flower.name }}
+        <span tuiSubtitle>{{ flower.color }}</span>
+        <span tuiSubtitle>{{ flower.price | currency}}</span>
+      </h1>
+    </header>
 
-  <thead tuiThead>
-  <tr tuiThGroup>
-    <th tuiTh>Название</th>
-    <th tuiTh>Цвет</th>
-    <th tuiTh>Цена</th>
-  </tr>
+    <footer class="buttons-flower-card">
+      <button
+        appearance="secondary"
+        size="m"
+        tuiButton
+        type="button"
+      >
+        Купить
+      </button>
+      <button
+        appearance="secondary"
+        size="m"
+        tuiButton
+        type="button"
+        class="edit"
+      >
+        Изменить
+      </button>
+    </footer>
+  </div>
+</div>
 
-  </thead>
-  <tbody tuiTbody [data]="flowers">
-
-  <tr *ngFor="let flower of flowers" tuiTr>
-    <td tuiTd>{{ flower.name }}</td>
-    <td tuiTd>
-      {{flower.color}}
-    </td>
-    <td tuiTd>{{ flower.price | currency }}</td>
-  </tr>
-
-  </tbody>
-</table>

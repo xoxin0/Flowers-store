@@ -11,7 +11,19 @@ import {RouterLink, RouterOutlet} from '@angular/router';
 
 @Component({
   selector: 'app-flower-form',
-  imports: [ReactiveFormsModule, TuiTextfield, TuiInputNumber, TuiCurrencyPipe, TuiButton, TuiAppearance, TuiCardLarge, TuiForm, TuiSegmented, TuiHeader, TuiTitle, RouterLink, RouterOutlet],
+  imports: [
+    ReactiveFormsModule,
+    TuiTextfield,
+    TuiInputNumber,
+    TuiCurrencyPipe,
+    TuiButton,
+    TuiAppearance,
+    TuiCardLarge,
+    TuiForm,
+    TuiHeader,
+    TuiTitle,
+    RouterLink,
+    RouterOutlet],
   templateUrl: './flower-form.component.html',
   styleUrl: './flower-form.component.scss'
 })
@@ -34,9 +46,5 @@ export class FlowerFormComponent {
   create(): void {
     this.flowerService.postFlower(this.flowerForm.getRawValue())
       .subscribe();
-  }
-
-  test(): void {
-    console.log(this.flowerForm.getRawValue());
   }
 }
