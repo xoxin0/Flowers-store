@@ -1,47 +1,55 @@
-import {Component, OnInit, ChangeDetectionStrategy} from '@angular/core';
-import {TuiAppearance, TuiFormatNumberPipe, TuiTitle} from '@taiga-ui/core';
-import {TuiCardLarge, TuiHeader} from '@taiga-ui/layout';
+import {
+  Component,
+  OnInit,
+  ChangeDetectionStrategy
+} from '@angular/core';
+
 import {GetAllFlowerService} from '../../services/get-all-flower.service';
 import {Flower} from '../../interfaces/flower';
-import {AsyncPipe, CurrencyPipe, NgForOf} from '@angular/common';
+import {
+  AsyncPipe,
+  CurrencyPipe,
+  NgForOf,
+  NgIf
+} from '@angular/common';
+
 import {MatButtonModule} from '@angular/material/button';
 import {MatCardModule} from '@angular/material/card';
 import {TuiTable} from '@taiga-ui/addon-table';
+import {Observable} from 'rxjs';
+import {TuiAppearance, TuiButton, TuiTitle} from '@taiga-ui/core';
+import {TuiCardLarge, TuiCell, TuiHeader} from '@taiga-ui/layout';
+import {TuiRepeatTimes} from '@taiga-ui/cdk';
 
 @Component({
   selector: 'app-flowers-table',
   imports: [
-    TuiAppearance,
-    TuiCardLarge,
-    TuiHeader,
-    TuiTitle,
     NgForOf,
     MatCardModule,
     MatButtonModule,
-    TuiTable,
     AsyncPipe,
-    TuiFormatNumberPipe,
-    CurrencyPipe
+    CurrencyPipe,
+    TuiTitle,
+    TuiHeader,
+    TuiCardLarge,
+    TuiAppearance,
+    TuiButton
   ],
   templateUrl: './flowers-table.component.html',
   styleUrl: './flowers-table.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-
 })
 
-export class FlowersTableComponent implements OnInit{
-  flowers: Flower[] = [];
-  readonly columns = ['name', 'color', 'price'];
+export class FlowersTableComponent implements OnInit {
+  flowers$: Observable<Flower[]> = new Observable()
 
   constructor(private getAllFlowerService: GetAllFlowerService) { }
 
   ngOnInit(): void {
-    this.loadFlowers()
+    this.loadFlowers();
   }
 
   loadFlowers(): void {
-    this.getAllFlowerService.getAllFlowers().subscribe({
-      next: (flowers) => this.flowers = flowers
-    })
+    this.flowers$ = this.getAllFlowerService.getAllFlowers();
   }
 }

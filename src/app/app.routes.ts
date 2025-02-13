@@ -4,5 +4,5 @@ import {FlowerFormComponent} from './components/flower-form/flower-form.componen
 
 export const routes: Routes = [
   { path: '', component: FlowerFormComponent, title: 'Добавление цветов' },
-  { path: 'flowers-table', component: FlowersTableComponent, title: 'Таблица цветов' }
+  { path: 'flowers-table', component: FlowersTableComponent, title: 'Каталог цветов' }
 ];
