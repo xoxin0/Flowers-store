@@ -4,8 +4,13 @@ import {
   ChangeDetectionStrategy
 } from '@angular/core';
 
-import {GetAllFlowerService} from '../../services/get-all-flower.service';
-import {Flower} from '../../interfaces/flower';
+import {
+  TuiAppearance,
+  TuiButton,
+  TuiDialog,
+  TuiTitle
+} from '@taiga-ui/core';
+
 import {
   AsyncPipe,
   CurrencyPipe,
@@ -13,13 +18,22 @@ import {
   NgIf
 } from '@angular/common';
 
-import {MatButtonModule} from '@angular/material/button';
-import {MatCardModule} from '@angular/material/card';
-import {TuiTable} from '@taiga-ui/addon-table';
-import {Observable} from 'rxjs';
-import {TuiAppearance, TuiButton, TuiTitle} from '@taiga-ui/core';
-import {TuiCardLarge, TuiCell, TuiHeader} from '@taiga-ui/layout';
-import {TuiRepeatTimes} from '@taiga-ui/cdk';
+import {
+  FormControl,
+  FormGroup,
+  ReactiveFormsModule
+} from '@angular/forms';
+
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
+import { Observable } from 'rxjs';
+import { TuiCardLarge, TuiHeader } from '@taiga-ui/layout';
+import { TuiAutoFocus } from '@taiga-ui/cdk';
+
+import { TuiInputModule } from '@taiga-ui/legacy';
+import { PatchFlowerService } from '../../services/patch-flower.service';
+import { GetAllFlowerService } from '../../services/get-all-flower.service';
+import { Flower } from '../../interfaces/flower';
 
 @Component({
   selector: 'app-flowers-table',
@@ -33,7 +47,12 @@ import {TuiRepeatTimes} from '@taiga-ui/cdk';
     TuiHeader,
     TuiCardLarge,
     TuiAppearance,
-    TuiButton
+    TuiButton,
+    TuiDialog,
+    ReactiveFormsModule,
+    TuiInputModule,
+    TuiAutoFocus,
+    NgIf
   ],
   templateUrl: './flowers-table.component.html',
   styleUrl: './flowers-table.component.scss',
@@ -41,9 +60,26 @@ import {TuiRepeatTimes} from '@taiga-ui/cdk';
 })
 
 export class FlowersTableComponent implements OnInit {
-  flowers$: Observable<Flower[]> = new Observable()
+  selectedFlower: Flower = {
+    name: '',
+    color: '',
+    price: 0,
+  };
 
-  constructor(private getAllFlowerService: GetAllFlowerService) { }
+  flowers$: Observable<Flower[]> = new Observable();
+
+  protected open = false;
+
+  editForm = new FormGroup({
+    name: new FormControl(''),
+    color: new FormControl(''),
+    price: new FormControl(),
+  });
+
+  constructor(
+    private getAllFlowerService: GetAllFlowerService,
+    private patchFlowerService: PatchFlowerService
+  ) { }
 
   ngOnInit(): void {
     this.loadFlowers();
@@ -51,5 +87,26 @@ export class FlowersTableComponent implements OnInit {
 
   loadFlowers(): void {
     this.flowers$ = this.getAllFlowerService.getAllFlowers();
+  }
+
+  showSelectModal(flower: Flower): void {
+    this.open = true;
+    this.selectedFlower = flower;
+    console.log(this.selectedFlower);
+  }
+
+  editFlower(): void {
+    this.selectedFlower.name = <string>this.editForm.value.name;
+    this.selectedFlower.color = <string>this.editForm.value.color;
+    this.selectedFlower.price = Number(this.editForm.value.price);
+
+    this.editForm.reset();
+  }
+
+  updateFlower(id: number): void {
+
+    this.editFlower();
+
+    this.patchFlowerService.patchFlower(id, this.selectedFlower).subscribe()
   }
 }

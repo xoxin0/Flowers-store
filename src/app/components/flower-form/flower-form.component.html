@@ -29,6 +29,17 @@
         </h2>
       </header>
 
+      <tui-textfield class="form-name">
+        <label for="name">Name:</label>
+        <input id="name" type="text" placeholder="Rose" formControlName="name">
+      </tui-textfield>
+
+      <tui-textfield class="form-color">
+        <label for="color" tuiLabel>Color:</label>
+
+        <input id="color" type="text" placeholder="red" formControlName="color">
+      </tui-textfield>
+
       <tui-textfield class="form-price">
         <label for="price" tuiLabel>Price:</label>
 
@@ -38,17 +49,6 @@
                [min]="0"
                [prefix]="'USD' | tuiCurrency"
         />
-      </tui-textfield>
-
-      <tui-textfield class="form-color">
-        <label for="color">Color:</label>
-
-        <input id="color" type="text" placeholder="red" formControlName="color">
-      </tui-textfield>
-
-      <tui-textfield class="form-name">
-        <label for="name">Name:</label>
-        <input id="name" type="text" placeholder="Rose" formControlName="name">
       </tui-textfield>
 
         <button

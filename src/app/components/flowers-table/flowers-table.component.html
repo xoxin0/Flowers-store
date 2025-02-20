@@ -22,16 +22,59 @@
       >
         Купить
       </button>
+
       <button
-        appearance="secondary"
         size="m"
         tuiButton
         type="button"
-        class="edit"
+        (click)="showSelectModal(flower)"
       >
         Изменить
       </button>
+
+      <ng-template
+        let-observer
+        [tuiDialogOptions]="{label: 'Измени как душе угодно', size: 's'}"
+        [(tuiDialog)]="open"
+      >
+
+        <form
+          [formGroup]="editForm"
+          (ngSubmit)="observer.complete()"
+        >
+          <tui-input
+            tuiAutoFocus
+            formControlName="name"
+            class="tui-input-name"
+          >
+            Name:
+          </tui-input>
+          <tui-input
+            formControlName="color"
+            class="tui-input-color"
+          >
+            Color:
+          </tui-input>
+          <tui-input
+            formControlName="price"
+            class="tui-input-price"
+          >
+            Price:
+          </tui-input>
+          <p>
+            <button
+              size="m"
+              tuiButton
+              type="submit"
+              *ngIf="flower.id !== undefined"
+              (click)="updateFlower(flower.id)"
+            >
+              Изменить
+            </button>
+          </p>
+        </form>
+      </ng-template>
+
     </footer>
   </div>
 </div>
-
