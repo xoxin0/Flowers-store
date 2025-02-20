@@ -1,12 +1,28 @@
-import {Component, OnInit} from '@angular/core';
-import {ReactiveFormsModule, FormControl, FormGroup} from '@angular/forms';
-import {PostFlowerService} from '../../services/post-flower.service';
-import {Flower} from '../../interfaces/flower';
-import {TuiAppearance, TuiButton, TuiTextfield, TuiTitle} from '@taiga-ui/core';
-import {TuiInputNumber, TuiSegmented} from '@taiga-ui/kit';
-import {TuiCurrencyPipe} from '@taiga-ui/addon-commerce';
-import {TuiCardLarge, TuiForm, TuiHeader} from '@taiga-ui/layout';
-import {RouterLink, RouterOutlet} from '@angular/router';
+import {
+  ReactiveFormsModule,
+  FormControl,
+  FormGroup
+} from '@angular/forms';
+
+import {
+  TuiAppearance,
+  TuiButton,
+  TuiTextfield,
+  TuiTitle
+} from '@taiga-ui/core';
+
+import {
+  TuiCardLarge,
+  TuiForm,
+  TuiHeader
+} from '@taiga-ui/layout';
+
+import { Component } from '@angular/core';
+import { RouterLink } from '@angular/router';
+import { PostFlowerService } from '../../services/post-flower.service';
+import { Flower} from '../../interfaces/flower';
+import { TuiInputNumber } from '@taiga-ui/kit';
+import { TuiCurrencyPipe } from '@taiga-ui/addon-commerce';
 
 
 @Component({
@@ -22,8 +38,8 @@ import {RouterLink, RouterOutlet} from '@angular/router';
     TuiForm,
     TuiHeader,
     TuiTitle,
-    RouterLink,
-    RouterOutlet],
+    RouterLink
+  ],
   templateUrl: './flower-form.component.html',
   styleUrl: './flower-form.component.scss'
 })
