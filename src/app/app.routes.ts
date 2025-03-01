@@ -3,6 +3,6 @@ import {FlowersTableComponent} from './components/flowers-table/flowers-table.co
 import {FlowerFormComponent} from './components/flower-form/flower-form.component';
 
 export const routes: Routes = [
-  { path: '', component: FlowerFormComponent, title: 'Добавление цветов' },
-  { path: 'flowers-table', component: FlowersTableComponent, title: 'Каталог цветов' }
+  { path: 'flower-form', component: FlowerFormComponent, title: 'Добавление цветов' },
+  { path: '', component: FlowersTableComponent, title: 'Каталог цветов' }
 ];

@@ -1,3 +1,18 @@
+<header class="header-flower-tables">
+
+  <a class="link-on-flower-form" routerLink="/flower-form">
+    <button
+      size="s"
+      tuiButton
+      type="button"
+      class="flower-form-link-button"
+    >
+      Добавить
+    </button>
+  </a>
+
+</header>
+
 <div class="container">
   <div
     tuiAppearance="floating"
@@ -34,7 +49,7 @@
 
       <ng-template
         let-observer
-        [tuiDialogOptions]="{label: 'Измени как душе угодно', size: 's'}"
+        [tuiDialogOptions]="{label: 'Declarative directive', size: 's'}"
         [(tuiDialog)]="open"
       >
 
@@ -49,32 +64,35 @@
           >
             Name:
           </tui-input>
+
           <tui-input
             formControlName="color"
             class="tui-input-color"
           >
             Color:
           </tui-input>
+
           <tui-input
             formControlName="price"
             class="tui-input-price"
           >
             Price:
           </tui-input>
+
           <p>
             <button
               size="m"
               tuiButton
               type="submit"
               *ngIf="flower.id !== undefined"
-              (click)="updateFlower(flower.id)"
+              (click)="updateFlower()"
+              [disabled]="!editForm.valid"
             >
               Изменить
             </button>
           </p>
         </form>
       </ng-template>
-
     </footer>
   </div>
 </div>

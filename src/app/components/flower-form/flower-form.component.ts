@@ -1,7 +1,7 @@
 import {
   ReactiveFormsModule,
   FormControl,
-  FormGroup
+  FormGroup, Validators
 } from '@angular/forms';
 
 import {
@@ -20,10 +20,8 @@ import {
 import { Component } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { PostFlowerService } from '../../services/post-flower.service';
-import { Flower} from '../../interfaces/flower';
 import { TuiInputNumber } from '@taiga-ui/kit';
 import { TuiCurrencyPipe } from '@taiga-ui/addon-commerce';
-
 
 @Component({
   selector: 'app-flower-form',
@@ -45,17 +43,12 @@ import { TuiCurrencyPipe } from '@taiga-ui/addon-commerce';
 })
 
 export class FlowerFormComponent {
-  flowerForm = new FormGroup({
-    price: new FormControl<number>(0, { nonNullable: true }),
-    color: new FormControl<string>('', { nonNullable: true }),
-    name: new FormControl<string>('', { nonNullable: true }),
-  })
 
-  flower: Flower = {
-    price: 0,
-    color: '',
-    name: ''
-  }
+  flowerForm = new FormGroup({
+    price: new FormControl<number>(0, { nonNullable: true, validators: [Validators.required] }),
+    color: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+    name: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+  })
 
   constructor(private flowerService: PostFlowerService) {}
 

@@ -21,19 +21,22 @@ import {
 import {
   FormControl,
   FormGroup,
-  ReactiveFormsModule
+  ReactiveFormsModule, Validators
 } from '@angular/forms';
 
+import {
+  TuiCardLarge,
+  TuiHeader
+} from '@taiga-ui/layout';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { Observable } from 'rxjs';
-import { TuiCardLarge, TuiHeader } from '@taiga-ui/layout';
 import { TuiAutoFocus } from '@taiga-ui/cdk';
-
 import { TuiInputModule } from '@taiga-ui/legacy';
 import { PatchFlowerService } from '../../services/patch-flower.service';
 import { GetAllFlowerService } from '../../services/get-all-flower.service';
 import { Flower } from '../../interfaces/flower';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-flowers-table',
@@ -52,7 +55,8 @@ import { Flower } from '../../interfaces/flower';
     ReactiveFormsModule,
     TuiInputModule,
     TuiAutoFocus,
-    NgIf
+    NgIf,
+    RouterLink
   ],
   templateUrl: './flowers-table.component.html',
   styleUrl: './flowers-table.component.scss',
@@ -60,20 +64,22 @@ import { Flower } from '../../interfaces/flower';
 })
 
 export class FlowersTableComponent implements OnInit {
+
+  selectedFlowerID: number = 0;
   selectedFlower: Flower = {
     name: '',
     color: '',
     price: 0,
   };
 
-  flowers$: Observable<Flower[]> = new Observable();
-
   protected open = false;
 
+  flowers$: Observable<Flower[]> = new Observable();
+
   editForm = new FormGroup({
-    name: new FormControl(''),
-    color: new FormControl(''),
-    price: new FormControl(),
+    name: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+    color: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+    price: new FormControl<number>(0, { nonNullable: true, validators: [Validators.required] }),
   });
 
   constructor(
@@ -92,21 +98,20 @@ export class FlowersTableComponent implements OnInit {
   showSelectModal(flower: Flower): void {
     this.open = true;
     this.selectedFlower = flower;
-    console.log(this.selectedFlower);
+    this.selectedFlowerID = flower.id!;
+
+    this.editForm.patchValue({
+      name: flower.name,
+      color: flower.color,
+      price: flower.price
+    })
   }
 
-  editFlower(): void {
-    this.selectedFlower.name = <string>this.editForm.value.name;
-    this.selectedFlower.color = <string>this.editForm.value.color;
-    this.selectedFlower.price = Number(this.editForm.value.price);
+  updateFlower(): void {
+    const editData: Flower = this.editForm.getRawValue();
+    editData.price = Number(editData.price);
 
-    this.editForm.reset();
-  }
-
-  updateFlower(id: number): void {
-
-    this.editFlower();
-
-    this.patchFlowerService.patchFlower(id, this.selectedFlower).subscribe()
+    this.patchFlowerService.patchFlower(this.selectedFlowerID, editData)
+      .subscribe();
   }
 }

@@ -1,6 +1,6 @@
 <header class="header-flower-form">
 
-  <a class="flower-table-link" routerLink="/flowers-table">
+  <a class="flower-table-link" routerLink="/">
     <button
       size="s"
       tuiButton
@@ -31,13 +31,24 @@
 
       <tui-textfield class="form-name">
         <label for="name">Name:</label>
-        <input id="name" type="text" placeholder="Rose" formControlName="name">
+
+        <input
+          id="name"
+          type="text"
+          placeholder="Rose"
+          formControlName="name"
+        />
       </tui-textfield>
 
       <tui-textfield class="form-color">
         <label for="color" tuiLabel>Color:</label>
 
-        <input id="color" type="text" placeholder="red" formControlName="color">
+        <input
+          id="color"
+          type="text"
+          placeholder="red"
+          formControlName="color"
+        />
       </tui-textfield>
 
       <tui-textfield class="form-price">
@@ -56,6 +67,7 @@
           type="submit"
           class="button-submit"
           (click)="create()"
+          [disabled]="!flowerForm.valid"
         >
           Submit
         </button>

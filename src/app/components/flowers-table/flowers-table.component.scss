@@ -1,3 +1,29 @@
+* {
+  --button-color: #7472f7;
+  --accent-color: #aea7fa;
+  --button-color-hover: #131196;
+  --input-color-panel: #e0e0e9;
+}
+
+.header-flower-tables {
+  padding: 20px;
+  display: flex;
+  justify-content: flex-end;
+  background-color: #9d55e5;
+
+  .link-on-flower-form {
+    margin-right: 20vw;
+    .flower-form-link-button {
+      font-weight: bold;
+      background-color: var(--button-color);
+    }
+
+    .flower-form-link-button:hover {
+      background-color: var(--button-color-hover);
+    }
+  }
+}
+
 .container {
   background-color: #aea7fa;
   min-height: 100vh;

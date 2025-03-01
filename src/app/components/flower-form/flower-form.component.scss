@@ -5,6 +5,25 @@
   --input-color-panel: #e0e0e9;
 }
 
+.header-flower-form {
+  padding: 20px;
+  display: flex;
+  justify-content: flex-end;
+  background-color: #9d55e5;
+
+  .flower-table-link {
+    margin-right: 20vw;
+    .flower-table-link-button {
+      font-weight: bold;
+      background-color: var(--button-color);
+    }
+
+    .flower-table-link-button:hover {
+      background-color: var(--button-color-hover);
+    }
+  }
+}
+
 #form {
   display: flex;
   justify-content: center;
@@ -69,24 +88,3 @@
     }
   }
 }
-
-.header-flower-form {
-  padding: 20px;
-  display: flex;
-  justify-content: flex-end;
-  background-color: #9d55e5;
-
-  .flower-table-link {
-    margin-right: 20vw;
-    .flower-table-link-button {
-      font-weight: bold;
-      background-color: var(--button-color);
-    }
-
-    .flower-table-link-button:hover {
-      background-color: var(--button-color-hover);
-    }
-  }
-}
-
-
