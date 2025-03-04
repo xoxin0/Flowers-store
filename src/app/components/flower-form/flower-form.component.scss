@@ -5,20 +5,21 @@
   --input-color-panel: #e0e0e9;
 }
 
-.header-flower-form {
+.header__flower--form {
   padding: 20px;
   display: flex;
   justify-content: flex-end;
   background-color: #9d55e5;
 
-  .flower-table-link {
+  .flower--table__link {
     margin-right: 20vw;
-    .flower-table-link-button {
+
+    .flower--table__link__button {
       font-weight: bold;
       background-color: var(--button-color);
     }
 
-    .flower-table-link-button:hover {
+    .flower--table__link__button:hover {
       background-color: var(--button-color-hover);
     }
   }
@@ -28,7 +29,7 @@
   display: flex;
   justify-content: center;
 
-  .form-block {
+  .form--block {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -41,8 +42,7 @@
       border: var(--accent-color) 2px solid;
     }
 
-    .form-color {
-      margin-top: 12px;
+    .form--color {
 
       #color {
         background-color: #fff;
@@ -56,7 +56,7 @@
       }
     }
 
-    .form-name {
+    .form--name {
       margin-top: 12px;
       width: 15vw;
 
@@ -72,10 +72,10 @@
       }
     }
 
-    .button-submit {
+    .button--submit {
         margin-top: 10px;
-        height: 4vh;
-        width: 4vw;
+        height: 13%;
+        width: 35%;
         border: none;
         border-radius: 5px;
         background-color: var(--button-color);
@@ -83,8 +83,20 @@
         cursor: pointer;
     }
 
-    .button-submit:hover {
+    .button--submit:hover {
         background-color: var(--button-color-hover);
+    }
+  }
+}
+
+@media (max-width: 1400px) {
+  #form {
+
+    .form--block {
+
+      .form--name {
+        width: 100%;
+      }
     }
   }
 }

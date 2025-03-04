@@ -5,20 +5,21 @@
   --input-color-panel: #e0e0e9;
 }
 
-.header-flower-tables {
+.header__flower--tables {
   padding: 20px;
   display: flex;
   justify-content: flex-end;
   background-color: #9d55e5;
 
-  .link-on-flower-form {
+  .link--flower__form {
     margin-right: 20vw;
-    .flower-form-link-button {
+
+    .flower__form__link__button {
       font-weight: bold;
       background-color: var(--button-color);
     }
 
-    .flower-form-link-button:hover {
+    .flower--form__link__button:hover {
       background-color: var(--button-color-hover);
     }
   }
@@ -31,23 +32,69 @@
   justify-content: space-around;
   flex-wrap: wrap;
 
-  .flower-card {
+  .flower--card {
     margin: 5vh 2vw;
-    width: 15vw;
-    height: 25vh;
 
-
-    .buttons-flower-card {
+    .buttons--flower--card {
       display: flex;
       justify-content: space-between;
     }
   }
 }
 
-.tui-input-price, .tui-input-color {
-  margin-top: 1rem;
+@media (min-width: 1200px) {
+  .container {
+
+    .flower--card {
+      align-self: center;
+      width: 20%;
+      height: 100%;
+
+      .buttons--flower--card {
+
+        .button--edit {
+          margin-left: 15px;
+        }
+      }
+    }
+  }
 }
 
-.tui-input-name {
-  margin-top: 2rem;
+@media (max-width: 1200px) {
+  .container {
+
+    .flower--card {
+      align-self: center;
+      width: 30%;
+
+      .buttons--flower--card {
+
+        .button--edit {
+          margin-left: 15px;
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 800px) {
+  .container {
+    flex-direction: column;
+
+    .flower--card {
+      align-self: center;
+      width: 60%;
+    }
+  }
+}
+
+@media (max-width: 400px) {
+  .container {
+    flex-direction: column;
+
+    .flower--card {
+      align-self: center;
+      width: 90%;
+    }
+  }
 }

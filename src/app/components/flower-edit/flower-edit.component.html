@@ -6,7 +6,7 @@
       tuiCardLarge
       tuiForm="m"
       [style.max-width.rem]="32"
-      id="edit-form"
+      id="edit__form"
     >
 
       <header tuiHeader>
@@ -15,30 +15,30 @@
         </h2>
       </header>
 
-      <tui-textfield class="textfield__edit-name">
-        <label for="edit-name">Name:</label>
+      <tui-textfield class="textfield--edit--name">
+        <label for="edit--name">Name:</label>
 
         <input
-          id="edit-name"
+          id="edit--name"
           type="text"
           formControlName="name"
         />
       </tui-textfield>
 
-      <tui-textfield class="textfield__edit-color">
-        <label for="edit-color" tuiLabel>Color:</label>
+      <tui-textfield class="textfield--edit--color">
+        <label for="edit--color" tuiLabel>Color:</label>
 
         <input
-          id="edit-color"
+          id="edit--color"
           type="text"
           formControlName="color"
         />
       </tui-textfield>
 
-      <tui-textfield class="textfield__edit-price">
-        <label for="edit-price" tuiLabel>Price:</label>
+      <tui-textfield class="textfield--edit--price">
+        <label for="edit--price" tuiLabel>Price:</label>
 
-        <input id="edit-price"
+        <input id="edit--price"
                formControlName="price"
                tuiInputNumber
                [min]="0"
@@ -46,23 +46,21 @@
         />
       </tui-textfield>
 
-      <div class="div__edit-link">
-
+      <div class="div__edit--link">
         <a
           routerLink="/"
-          class="edit-link"
+          class="edit__link"
         >
           <button
             tuiButton
             type="submit"
-            class="edit-link__button"
+            class="edit__link__button"
             (click)="updateFlower()"
             [disabled]="!editForm.valid"
           >
             Изменить
           </button>
         </a>
-
       </div>
     </form>
   </div>
