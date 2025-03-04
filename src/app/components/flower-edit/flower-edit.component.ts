@@ -1,12 +1,36 @@
-import {Component, inject, OnInit} from '@angular/core';
-import {Flower} from '../../interfaces/flower';
-import {PatchFlowerService} from '../../services/patch-flower.service';
-import {Router, RouterLink} from '@angular/router';
-import {FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators} from '@angular/forms';
-import {TuiAppearance, TuiButton, TuiLabel, TuiTextfieldComponent, TuiTitle} from '@taiga-ui/core';
-import {TuiCurrencyPipe} from '@taiga-ui/addon-commerce';
-import {TuiInputNumber} from '@taiga-ui/kit';
-import {TuiCardLarge, TuiForm, TuiHeader} from '@taiga-ui/layout';
+import {
+  Component,
+  inject,
+  OnInit
+} from '@angular/core';
+
+import {
+  FormControl,
+  FormGroup,
+  FormsModule,
+  ReactiveFormsModule,
+  Validators
+} from '@angular/forms';
+
+import {
+  TuiAppearance,
+  TuiButton,
+  TuiLabel,
+  TuiTextfieldComponent,
+  TuiTitle
+} from '@taiga-ui/core';
+
+import {
+  TuiCardLarge,
+  TuiForm,
+  TuiHeader
+} from '@taiga-ui/layout';
+
+import { TuiCurrencyPipe } from '@taiga-ui/addon-commerce';
+import { TuiInputNumber } from '@taiga-ui/kit';
+import { Flower } from '../../interfaces/flower';
+import { PatchFlowerService } from '../../services/patch-flower.service';
+import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-flower-edit',
@@ -46,7 +70,7 @@ export class FlowerEditComponent implements OnInit {
 
   private patchFlowerService = inject(PatchFlowerService);
 
-  constructor(private router: Router) {}
+  constructor() {}
 
   ngOnInit() {
      this.selectedFlower = history.state.selectedFlower;

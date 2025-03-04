@@ -2,7 +2,7 @@ import {
   Component,
   OnInit,
   ChangeDetectionStrategy,
-  inject, Input
+  inject
 } from '@angular/core';
 
 import {
@@ -26,13 +26,17 @@ import {
   TuiHeader
 } from '@taiga-ui/layout';
 
+import {
+  Router,
+  RouterLink
+} from '@angular/router';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { Observable } from 'rxjs';
 import { TuiInputModule } from '@taiga-ui/legacy';
 import { GetAllFlowerService } from '../../services/get-all-flower.service';
 import { Flower } from '../../interfaces/flower';
-import {Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-flowers-table',
@@ -58,7 +62,6 @@ import {Router, RouterLink} from '@angular/router';
 
 export class FlowersTableComponent implements OnInit {
 
-  public selectedFlowerID: number = 0;
   public selectedFlower: Flower = {
     name: '',
     color: '',
