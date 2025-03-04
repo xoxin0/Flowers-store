@@ -12,7 +12,7 @@ export class PatchFlowerService {
 
   constructor(private http: HttpClient) { }
 
-  patchFlower(id: number, flower: Flower): Observable<Flower> {
+  public patchFlower(id: number, flower: Flower): Observable<Flower> {
     return this.http.patch<Flower>(`${this.flowersUrl}/${id}`, flower)
   }
 }

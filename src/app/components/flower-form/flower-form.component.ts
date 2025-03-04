@@ -22,6 +22,7 @@ import { RouterLink } from '@angular/router';
 import { PostFlowerService } from '../../services/post-flower.service';
 import { TuiInputNumber } from '@taiga-ui/kit';
 import { TuiCurrencyPipe } from '@taiga-ui/addon-commerce';
+import { inject } from '@angular/core';
 
 @Component({
   selector: 'app-flower-form',
@@ -44,15 +45,17 @@ import { TuiCurrencyPipe } from '@taiga-ui/addon-commerce';
 
 export class FlowerFormComponent {
 
-  flowerForm = new FormGroup({
+  public flowerForm = new FormGroup({
     price: new FormControl<number>(0, { nonNullable: true, validators: [Validators.required] }),
     color: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
     name: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
   })
 
-  constructor(private flowerService: PostFlowerService) {}
+  private flowerService = inject(PostFlowerService);
 
-  create(): void {
+  constructor() {}
+
+  public create(): void {
     this.flowerService.postFlower(this.flowerForm.getRawValue())
       .subscribe();
   }

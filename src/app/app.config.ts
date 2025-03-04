@@ -16,6 +16,8 @@ export const appConfig: ApplicationConfig = {
     provideRouter(routes),
     provideHttpClient(),
     provideAnimations(),
-    NG_EVENT_PLUGINS, provideAnimationsAsync('noop'), provideAnimationsAsync()
+    NG_EVENT_PLUGINS,
+    provideAnimationsAsync('noop'),
+    provideAnimationsAsync()
   ]
 };

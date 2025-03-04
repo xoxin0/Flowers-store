@@ -1,13 +1,13 @@
 import {
   Component,
   OnInit,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  inject, Input
 } from '@angular/core';
 
 import {
   TuiAppearance,
   TuiButton,
-  TuiDialog,
   TuiTitle
 } from '@taiga-ui/core';
 
@@ -15,28 +15,24 @@ import {
   AsyncPipe,
   CurrencyPipe,
   NgForOf,
-  NgIf
 } from '@angular/common';
 
 import {
-  FormControl,
-  FormGroup,
-  ReactiveFormsModule, Validators
+  ReactiveFormsModule
 } from '@angular/forms';
 
 import {
   TuiCardLarge,
   TuiHeader
 } from '@taiga-ui/layout';
+
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { Observable } from 'rxjs';
-import { TuiAutoFocus } from '@taiga-ui/cdk';
 import { TuiInputModule } from '@taiga-ui/legacy';
-import { PatchFlowerService } from '../../services/patch-flower.service';
 import { GetAllFlowerService } from '../../services/get-all-flower.service';
 import { Flower } from '../../interfaces/flower';
-import { RouterLink } from '@angular/router';
+import {Router, RouterLink} from '@angular/router';
 
 @Component({
   selector: 'app-flowers-table',
@@ -51,12 +47,9 @@ import { RouterLink } from '@angular/router';
     TuiCardLarge,
     TuiAppearance,
     TuiButton,
-    TuiDialog,
     ReactiveFormsModule,
     TuiInputModule,
-    TuiAutoFocus,
-    NgIf,
-    RouterLink
+    RouterLink,
   ],
   templateUrl: './flowers-table.component.html',
   styleUrl: './flowers-table.component.scss',
@@ -65,53 +58,37 @@ import { RouterLink } from '@angular/router';
 
 export class FlowersTableComponent implements OnInit {
 
-  selectedFlowerID: number = 0;
-  selectedFlower: Flower = {
+  public selectedFlowerID: number = 0;
+  public selectedFlower: Flower = {
     name: '',
     color: '',
     price: 0,
   };
 
-  protected open = false;
+  public flowers$: Observable<Flower[]> = new Observable();
 
-  flowers$: Observable<Flower[]> = new Observable();
+  private getAllFlowerService = inject(GetAllFlowerService);
 
-  editForm = new FormGroup({
-    name: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
-    color: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
-    price: new FormControl<number>(0, { nonNullable: true, validators: [Validators.required] }),
-  });
-
-  constructor(
-    private getAllFlowerService: GetAllFlowerService,
-    private patchFlowerService: PatchFlowerService
-  ) { }
+  constructor(private router: Router) { }
 
   ngOnInit(): void {
     this.loadFlowers();
   }
 
-  loadFlowers(): void {
-    this.flowers$ = this.getAllFlowerService.getAllFlowers();
+  giveSelectedFlower() {
+    const selectedFlower = this.selectedFlower;
+    this.router.navigate(['/flower-edit'], {
+      state: { selectedFlower }
+    }).then(r => console.log(r));
   }
 
-  showSelectModal(flower: Flower): void {
-    this.open = true;
+  public getSelectedFlower(flower: Flower): void {
     this.selectedFlower = flower;
-    this.selectedFlowerID = flower.id!;
 
-    this.editForm.patchValue({
-      name: flower.name,
-      color: flower.color,
-      price: flower.price
-    })
+    this.giveSelectedFlower();
   }
 
-  updateFlower(): void {
-    const editData: Flower = this.editForm.getRawValue();
-    editData.price = Number(editData.price);
-
-    this.patchFlowerService.patchFlower(this.selectedFlowerID, editData)
-      .subscribe();
+  public loadFlowers(): void {
+    this.flowers$ = this.getAllFlowerService.getAllFlowers();
   }
 }

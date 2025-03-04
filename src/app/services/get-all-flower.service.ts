@@ -12,7 +12,7 @@ export class GetAllFlowerService {
 
   constructor(private http: HttpClient) { }
 
-  getAllFlowers(): Observable<Flower[]> {
+  public getAllFlowers(): Observable<Flower[]> {
     return this.http.get<Flower[]>(this.getAllFlowersUrl);
   }
 }

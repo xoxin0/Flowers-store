@@ -12,7 +12,7 @@ export class PostFlowerService {
 
   constructor(private http: HttpClient) { }
 
-  postFlower(flower: Flower): Observable<Flower> {
+  public postFlower(flower: Flower): Observable<Flower> {
     return this.http.post<Flower>(this.flowersUrl, flower);
   }
 }
