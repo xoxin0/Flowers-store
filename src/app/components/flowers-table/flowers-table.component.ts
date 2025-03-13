@@ -2,7 +2,7 @@ import {
   Component,
   OnInit,
   ChangeDetectionStrategy,
-  inject
+  inject,
 } from '@angular/core';
 
 import {
@@ -37,6 +37,8 @@ import { Observable } from 'rxjs';
 import { TuiInputModule } from '@taiga-ui/legacy';
 import { GetAllFlowerService } from '../../services/get-all-flower.service';
 import { Flower } from '../../interfaces/flower';
+import { TuiButtonClose } from '@taiga-ui/kit';
+import { DeleteFlowerService } from '../../services/delete-flower.service';
 
 @Component({
   selector: 'app-flowers-table',
@@ -54,6 +56,7 @@ import { Flower } from '../../interfaces/flower';
     ReactiveFormsModule,
     TuiInputModule,
     RouterLink,
+    TuiButtonClose,
   ],
   templateUrl: './flowers-table.component.html',
   styleUrl: './flowers-table.component.scss',
@@ -71,8 +74,10 @@ export class FlowersTableComponent implements OnInit {
   public flowers$: Observable<Flower[]> = new Observable();
 
   private getAllFlowerService = inject(GetAllFlowerService);
+  private deleteFlowerService = inject(DeleteFlowerService);
+  private router = inject(Router);
 
-  constructor(private router: Router) { }
+  constructor() { }
 
   ngOnInit(): void {
     this.loadFlowers();
@@ -93,5 +98,12 @@ export class FlowersTableComponent implements OnInit {
 
   public loadFlowers(): void {
     this.flowers$ = this.getAllFlowerService.getAllFlowers();
+  }
+
+  public deleteFlower(flower: Flower): void {
+    this.deleteFlowerService.deleteFlowerInDataBase(flower.id!)
+      .subscribe();
+
+    window.location.reload();
   }
 }

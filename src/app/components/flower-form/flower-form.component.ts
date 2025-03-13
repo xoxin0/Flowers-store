@@ -1,7 +1,8 @@
 import {
   ReactiveFormsModule,
   FormControl,
-  FormGroup, Validators
+  FormGroup,
+  Validators
 } from '@angular/forms';
 
 import {

@@ -27,6 +27,13 @@
         <span tuiSubtitle>{{ flower.color }}</span>
         <span tuiSubtitle>{{ flower.price | currency}}</span>
       </h1>
+
+      <button
+        tuiButtonClose
+        tuiIconButton
+        type="button"
+        (click)="deleteFlower(flower)"
+      ></button>
     </header>
 
     <footer class="buttons--flower--card">
