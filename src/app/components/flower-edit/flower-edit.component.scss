@@ -60,13 +60,9 @@
         }
       }
 
-      .div__edit--link {
+      .div__edit__link {
         display: flex;
-        justify-content: flex-end;
-      }
-
-      .edit__link {
-        text-decoration: none;
+        justify-content: space-between;
 
         .edit__link__button {
           margin: 0;
@@ -91,6 +87,13 @@
     .container__form {
 
       #edit__form {
+
+        .div__edit__link {
+
+          .edit__link__button:nth-child(1) {
+            margin-right: 10px;
+          }
+        }
 
         .textfield--edit--name {
           width: 100%;

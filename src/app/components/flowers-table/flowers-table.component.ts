@@ -87,7 +87,7 @@ export class FlowersTableComponent implements OnInit {
     const selectedFlower = this.selectedFlower;
     this.router.navigate(['/flower-edit'], {
       state: { selectedFlower }
-    }).then(r => console.log(r));
+    }).then(r => console.debug(r));
   }
 
   public getSelectedFlower(flower: Flower): void {

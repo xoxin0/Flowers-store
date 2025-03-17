@@ -18,8 +18,12 @@ import {
   TuiHeader
 } from '@taiga-ui/layout';
 
+import {
+  Router,
+  RouterLink
+} from '@angular/router';
+
 import { Component } from '@angular/core';
-import { RouterLink } from '@angular/router';
 import { PostFlowerService } from '../../services/post-flower.service';
 import { TuiInputNumber } from '@taiga-ui/kit';
 import { TuiCurrencyPipe } from '@taiga-ui/addon-commerce';
@@ -53,11 +57,15 @@ export class FlowerFormComponent {
   })
 
   private flowerService = inject(PostFlowerService);
+  private router = inject(Router);
 
   constructor() {}
 
   public create(): void {
     this.flowerService.postFlower(this.flowerForm.getRawValue())
       .subscribe();
+
+    this.router.navigate(['/'])
+      .then(r => console.debug(r));
   }
 }

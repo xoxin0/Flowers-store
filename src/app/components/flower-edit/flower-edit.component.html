@@ -46,21 +46,26 @@
         />
       </tui-textfield>
 
-      <div class="div__edit--link">
-        <a
-          routerLink="/"
-          class="edit__link"
-        >
+      <div class="div__edit__link">
+        <a routerLink="/">
           <button
             tuiButton
             type="submit"
             class="edit__link__button"
-            (click)="updateFlower()"
-            [disabled]="!editForm.valid"
           >
-            Изменить
+            Отмена
           </button>
         </a>
+
+        <button
+          tuiButton
+          type="submit"
+          class="edit__link__button"
+          (click)="updateFlower()"
+          [disabled]="!editForm.valid"
+        >
+          Изменить
+        </button>
       </div>
     </form>
   </div>

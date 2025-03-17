@@ -26,11 +26,15 @@ import {
   TuiHeader
 } from '@taiga-ui/layout';
 
+import {
+  Router,
+  RouterLink
+} from '@angular/router';
+
 import { TuiCurrencyPipe } from '@taiga-ui/addon-commerce';
 import { TuiInputNumber } from '@taiga-ui/kit';
 import { Flower } from '../../interfaces/flower';
 import { PatchFlowerService } from '../../services/patch-flower.service';
-import { RouterLink } from '@angular/router';
 
 @Component({
   selector: 'app-flower-edit',
@@ -69,6 +73,7 @@ export class FlowerEditComponent implements OnInit {
   });
 
   private patchFlowerService = inject(PatchFlowerService);
+  private router = inject(Router)
 
   constructor() {}
 
@@ -87,5 +92,8 @@ export class FlowerEditComponent implements OnInit {
 
     this.patchFlowerService.patchFlower(this.selectedFlower.id!, editData)
       .subscribe();
+
+    this.router.navigate(['/'])
+      .then(r => console.debug(r));
   }
 }

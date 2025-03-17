@@ -73,18 +73,19 @@
     }
 
     .button--submit {
-        margin-top: 10px;
-        height: 13%;
-        width: 35%;
-        border: none;
-        border-radius: 5px;
-        background-color: var(--button-color);
-        color: aliceblue;
-        cursor: pointer;
+      align-self: flex-end;
+      margin-top: 10px;
+      height: 15%;
+      width: 37%;
+      border: none;
+      border-radius: 5px;
+      background-color: var(--button-color);
+      color: aliceblue;
+      cursor: pointer;
     }
 
     .button--submit:hover {
-        background-color: var(--button-color-hover);
+      background-color: var(--button-color-hover);
     }
   }
 }
@@ -93,6 +94,10 @@
   #form {
 
     .form--block {
+
+      .button--submit {
+        width: 45%;
+      }
 
       .form--name {
         width: 100%;
