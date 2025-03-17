@@ -17,8 +17,6 @@ export class DeleteFlowerService {
 
   private http = inject(HttpClient);
 
-  constructor() { }
-
   public deleteFlowerInDataBase(id: number): Observable<Flower> {
     return this.http.delete<Flower>(`${this.flowersUrl}/${id}`);
   }

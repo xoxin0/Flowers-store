@@ -30,7 +30,7 @@ import { TuiCurrencyPipe } from '@taiga-ui/addon-commerce';
 import { inject } from '@angular/core';
 
 @Component({
-  selector: 'app-flower-form',
+  selector: 'app-flower-create',
   imports: [
     ReactiveFormsModule,
     TuiTextfield,
@@ -44,11 +44,11 @@ import { inject } from '@angular/core';
     TuiTitle,
     RouterLink
   ],
-  templateUrl: './flower-form.component.html',
-  styleUrl: './flower-form.component.scss'
+  templateUrl: './flower-create.component.html',
+  styleUrl: './flower-create.component.scss'
 })
 
-export class FlowerFormComponent {
+export class FlowerCreateComponent {
 
   public flowerForm = new FormGroup({
     price: new FormControl<number>(0, { nonNullable: true, validators: [Validators.required] }),
@@ -56,16 +56,14 @@ export class FlowerFormComponent {
     name: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
   })
 
-  private flowerService = inject(PostFlowerService);
-  private router = inject(Router);
-
-  constructor() {}
+  private _flowerService = inject(PostFlowerService);
+  private _router = inject(Router);
 
   public create(): void {
-    this.flowerService.postFlower(this.flowerForm.getRawValue())
+    this._flowerService.postFlower(this.flowerForm.getRawValue())
       .subscribe();
 
-    this.router.navigate(['/'])
+    this._router.navigate(['/'])
       .then(r => console.debug(r));
   }
 }

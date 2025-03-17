@@ -17,8 +17,6 @@ export class GetAllFlowerService {
 
   private http = inject(HttpClient);
 
-  constructor() { }
-
   public getAllFlowers(): Observable<Flower[]> {
     return this.http.get<Flower[]>(this.getAllFlowersUrl);
   }

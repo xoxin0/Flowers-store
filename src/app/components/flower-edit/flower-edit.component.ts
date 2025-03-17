@@ -35,6 +35,7 @@ import { TuiCurrencyPipe } from '@taiga-ui/addon-commerce';
 import { TuiInputNumber } from '@taiga-ui/kit';
 import { Flower } from '../../interfaces/flower';
 import { PatchFlowerService } from '../../services/patch-flower.service';
+import { TransferSelectedFlowerService } from '../../services/transfer-selected-flower.service';
 
 @Component({
   selector: 'app-flower-edit',
@@ -59,8 +60,7 @@ import { PatchFlowerService } from '../../services/patch-flower.service';
 
 export class FlowerEditComponent implements OnInit {
 
-  public selectedFlower: Flower = {
-    id: 0,
+  public selectedFlowerInEdit: Flower = {
     name: '',
     color: '',
     price: 0,
@@ -72,17 +72,16 @@ export class FlowerEditComponent implements OnInit {
     price: new FormControl<number>(0, { nonNullable: true, validators: [Validators.required] }),
   });
 
-  private patchFlowerService = inject(PatchFlowerService);
-  private router = inject(Router)
-
-  constructor() {}
+  private _patchFlowerService = inject(PatchFlowerService);
+  private _router = inject(Router)
+  private _transferSelectedFlowerService = inject(TransferSelectedFlowerService);
 
   ngOnInit() {
-     this.selectedFlower = history.state.selectedFlower;
-     this.editForm.patchValue({
-           name: this.selectedFlower.name,
-           color: this.selectedFlower.color,
-           price: this.selectedFlower.price
+     this.selectedFlowerInEdit = {...this._transferSelectedFlowerService.selectedFlower};
+     this.editForm.setValue({
+           name: this.selectedFlowerInEdit.name,
+           color: this.selectedFlowerInEdit.color,
+           price: this.selectedFlowerInEdit.price
      })
   }
 
@@ -90,10 +89,10 @@ export class FlowerEditComponent implements OnInit {
     const editData: Flower = this.editForm.getRawValue();
     editData.price = Number(editData.price);
 
-    this.patchFlowerService.patchFlower(this.selectedFlower.id!, editData)
+    this._patchFlowerService.patchFlower(this.selectedFlowerInEdit.id!, editData)
       .subscribe();
 
-    this.router.navigate(['/'])
+    this._router.navigate(['/'])
       .then(r => console.debug(r));
   }
 }

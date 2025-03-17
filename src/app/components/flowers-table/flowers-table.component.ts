@@ -39,6 +39,7 @@ import { GetAllFlowerService } from '../../services/get-all-flower.service';
 import { Flower } from '../../interfaces/flower';
 import { TuiButtonClose } from '@taiga-ui/kit';
 import { DeleteFlowerService } from '../../services/delete-flower.service';
+import {TransferSelectedFlowerService} from '../../services/transfer-selected-flower.service';
 
 @Component({
   selector: 'app-flowers-table',
@@ -66,6 +67,7 @@ import { DeleteFlowerService } from '../../services/delete-flower.service';
 export class FlowersTableComponent implements OnInit {
 
   public selectedFlower: Flower = {
+    id: 0,
     name: '',
     color: '',
     price: 0,
@@ -73,21 +75,19 @@ export class FlowersTableComponent implements OnInit {
 
   public flowers$: Observable<Flower[]> = new Observable();
 
-  private getAllFlowerService = inject(GetAllFlowerService);
-  private deleteFlowerService = inject(DeleteFlowerService);
-  private router = inject(Router);
-
-  constructor() { }
+  private _getAllFlowerService = inject(GetAllFlowerService);
+  private _deleteFlowerService = inject(DeleteFlowerService);
+  private _router = inject(Router);
+  private _transferSelectedFlowerService = inject(TransferSelectedFlowerService);
 
   ngOnInit(): void {
     this.loadFlowers();
   }
 
-  giveSelectedFlower() {
-    const selectedFlower = this.selectedFlower;
-    this.router.navigate(['/flower-edit'], {
-      state: { selectedFlower }
-    }).then(r => console.debug(r));
+  public giveSelectedFlower() {
+    this._transferSelectedFlowerService.selectedFlower = {...this.selectedFlower};
+    this._router.navigate(['/flower-edit'])
+      .then(r => console.debug(r));
   }
 
   public getSelectedFlower(flower: Flower): void {
@@ -97,11 +97,11 @@ export class FlowersTableComponent implements OnInit {
   }
 
   public loadFlowers(): void {
-    this.flowers$ = this.getAllFlowerService.getAllFlowers();
+    this.flowers$ = this._getAllFlowerService.getAllFlowers();
   }
 
   public deleteFlower(flower: Flower): void {
-    this.deleteFlowerService.deleteFlowerInDataBase(flower.id!)
+    this._deleteFlowerService.deleteFlowerInDataBase(flower.id!)
       .subscribe();
 
     window.location.reload();

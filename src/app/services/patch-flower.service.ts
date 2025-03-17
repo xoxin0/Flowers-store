@@ -17,8 +17,6 @@ export class PatchFlowerService {
 
   private http = inject(HttpClient);
 
-  constructor() { }
-
   public patchFlower(id: number, flower: Flower): Observable<Flower> {
     return this.http.patch<Flower>(`${this.flowersUrl}/${id}`, flower)
   }

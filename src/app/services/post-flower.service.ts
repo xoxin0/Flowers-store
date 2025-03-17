@@ -17,8 +17,6 @@ export class PostFlowerService {
 
   private http = inject(HttpClient);
 
-  constructor() { }
-
   public postFlower(flower: Flower): Observable<Flower> {
     return this.http.post<Flower>(this.flowersUrl, flower);
   }
