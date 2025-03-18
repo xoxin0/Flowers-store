@@ -1,4 +1,8 @@
-import { Injectable } from '@angular/core';
+import {
+  inject,
+  Injectable
+} from '@angular/core';
+
 import { Flower } from '../interfaces/flower';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
@@ -8,11 +12,12 @@ import { HttpClient } from '@angular/common/http';
 })
 
 export class GetAllFlowerService {
+
   private getAllFlowersUrl = 'http://localhost:3000/api/flowers/getAll'
 
-  constructor(private http: HttpClient) { }
+  private http = inject(HttpClient);
 
-  getAllFlowers(): Observable<Flower[]> {
+  public getAllFlowers(): Observable<Flower[]> {
     return this.http.get<Flower[]>(this.getAllFlowersUrl);
   }
 }

@@ -4,20 +4,20 @@ import {
 } from '@angular/core';
 
 import { Flower } from '../interfaces/flower';
-import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
+import { Observable } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
 })
 
-export class PostFlowerService {
+export class DeleteFlowerService {
 
   private flowersUrl = 'http://localhost:3000/api/flowers/flower';
 
   private http = inject(HttpClient);
 
-  public postFlower(flower: Flower): Observable<Flower> {
-    return this.http.post<Flower>(this.flowersUrl, flower);
+  public deleteFlowerInDataBase(id: number): Observable<Flower> {
+    return this.http.delete<Flower>(`${this.flowersUrl}/${id}`);
   }
 }

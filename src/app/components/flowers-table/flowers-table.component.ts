@@ -1,13 +1,13 @@
 import {
   Component,
   OnInit,
-  ChangeDetectionStrategy
+  ChangeDetectionStrategy,
+  inject,
 } from '@angular/core';
 
 import {
   TuiAppearance,
   TuiButton,
-  TuiDialog,
   TuiTitle
 } from '@taiga-ui/core';
 
@@ -15,25 +15,31 @@ import {
   AsyncPipe,
   CurrencyPipe,
   NgForOf,
-  NgIf
 } from '@angular/common';
 
 import {
-  FormControl,
-  FormGroup,
   ReactiveFormsModule
 } from '@angular/forms';
+
+import {
+  TuiCardLarge,
+  TuiHeader
+} from '@taiga-ui/layout';
+
+import {
+  Router,
+  RouterLink
+} from '@angular/router';
 
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { Observable } from 'rxjs';
-import { TuiCardLarge, TuiHeader } from '@taiga-ui/layout';
-import { TuiAutoFocus } from '@taiga-ui/cdk';
-
 import { TuiInputModule } from '@taiga-ui/legacy';
-import { PatchFlowerService } from '../../services/patch-flower.service';
 import { GetAllFlowerService } from '../../services/get-all-flower.service';
 import { Flower } from '../../interfaces/flower';
+import { TuiButtonClose } from '@taiga-ui/kit';
+import { DeleteFlowerService } from '../../services/delete-flower.service';
+import {TransferSelectedFlowerService} from '../../services/transfer-selected-flower.service';
 
 @Component({
   selector: 'app-flowers-table',
@@ -48,11 +54,10 @@ import { Flower } from '../../interfaces/flower';
     TuiCardLarge,
     TuiAppearance,
     TuiButton,
-    TuiDialog,
     ReactiveFormsModule,
     TuiInputModule,
-    TuiAutoFocus,
-    NgIf
+    RouterLink,
+    TuiButtonClose,
   ],
   templateUrl: './flowers-table.component.html',
   styleUrl: './flowers-table.component.scss',
@@ -60,53 +65,45 @@ import { Flower } from '../../interfaces/flower';
 })
 
 export class FlowersTableComponent implements OnInit {
-  selectedFlower: Flower = {
+
+  public selectedFlower: Flower = {
+    id: 0,
     name: '',
     color: '',
     price: 0,
   };
 
-  flowers$: Observable<Flower[]> = new Observable();
+  public flowers$: Observable<Flower[]> = new Observable();
 
-  protected open = false;
-
-  editForm = new FormGroup({
-    name: new FormControl(''),
-    color: new FormControl(''),
-    price: new FormControl(),
-  });
-
-  constructor(
-    private getAllFlowerService: GetAllFlowerService,
-    private patchFlowerService: PatchFlowerService
-  ) { }
+  private _getAllFlowerService = inject(GetAllFlowerService);
+  private _deleteFlowerService = inject(DeleteFlowerService);
+  private _router = inject(Router);
+  private _transferSelectedFlowerService = inject(TransferSelectedFlowerService);
 
   ngOnInit(): void {
     this.loadFlowers();
   }
 
-  loadFlowers(): void {
-    this.flowers$ = this.getAllFlowerService.getAllFlowers();
+  public giveSelectedFlower() {
+    this._transferSelectedFlowerService.selectedFlower = {...this.selectedFlower};
+    this._router.navigate(['/flower-edit'])
+      .then(r => console.debug(r));
   }
 
-  showSelectModal(flower: Flower): void {
-    this.open = true;
+  public getSelectedFlower(flower: Flower): void {
     this.selectedFlower = flower;
-    console.log(this.selectedFlower);
+
+    this.giveSelectedFlower();
   }
 
-  editFlower(): void {
-    this.selectedFlower.name = <string>this.editForm.value.name;
-    this.selectedFlower.color = <string>this.editForm.value.color;
-    this.selectedFlower.price = Number(this.editForm.value.price);
-
-    this.editForm.reset();
+  public loadFlowers(): void {
+    this.flowers$ = this._getAllFlowerService.getAllFlowers();
   }
 
-  updateFlower(id: number): void {
+  public deleteFlower(flower: Flower): void {
+    this._deleteFlowerService.deleteFlowerInDataBase(flower.id!)
+      .subscribe();
 
-    this.editFlower();
-
-    this.patchFlowerService.patchFlower(id, this.selectedFlower).subscribe()
+    window.location.reload();
   }
 }

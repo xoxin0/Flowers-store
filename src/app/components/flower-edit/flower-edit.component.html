@@ -1,0 +1,72 @@
+<div id="container">
+  <div class="container__form">
+    <form
+      [formGroup]="editForm"
+      tuiAppearance="floating"
+      tuiCardLarge
+      tuiForm="m"
+      [style.max-width.rem]="32"
+      id="edit__form"
+    >
+
+      <header tuiHeader>
+        <h2 tuiTitle>
+          Изменение цветов
+        </h2>
+      </header>
+
+      <tui-textfield class="textfield--edit--name">
+        <label for="edit--name">Name:</label>
+
+        <input
+          id="edit--name"
+          type="text"
+          formControlName="name"
+        />
+      </tui-textfield>
+
+      <tui-textfield class="textfield--edit--color">
+        <label for="edit--color" tuiLabel>Color:</label>
+
+        <input
+          id="edit--color"
+          type="text"
+          formControlName="color"
+        />
+      </tui-textfield>
+
+      <tui-textfield class="textfield--edit--price">
+        <label for="edit--price" tuiLabel>Price:</label>
+
+        <input id="edit--price"
+               formControlName="price"
+               tuiInputNumber
+               [min]="0"
+               [prefix]="'USD' | tuiCurrency"
+        />
+      </tui-textfield>
+
+      <div class="div__edit__link">
+        <a routerLink="/">
+          <button
+            tuiButton
+            type="submit"
+            class="edit__link__button"
+          >
+            Отмена
+          </button>
+        </a>
+
+        <button
+          tuiButton
+          type="submit"
+          class="edit__link__button"
+          (click)="updateFlower()"
+          [disabled]="!editForm.valid"
+        >
+          Изменить
+        </button>
+      </div>
+    </form>
+  </div>
+</div>

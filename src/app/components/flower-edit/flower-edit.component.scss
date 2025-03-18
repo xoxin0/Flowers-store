@@ -1,0 +1,104 @@
+* {
+  --button-color: #7472f7;
+  --accent-color: #aea7fa;
+  --button-color-hover: #131196;
+  --input-color-panel: #e0e0e9;
+}
+
+#container {
+  display: flex;
+  justify-content: center;
+
+  .container__form {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--accent-color);
+
+    #edit__form {
+
+      .textfield--edit--price {
+        margin-top: 12px;
+        margin-bottom: 10px;
+
+        #edit--price {
+          border: var(--accent-color) 2px solid;
+        }
+      }
+
+      .textfield--edit--color {
+        margin-top: 12px;
+
+        #edit--color {
+          background-color: #fff;
+          border: var(--accent-color) 2px solid;
+          box-shadow: 0 0 5px var(--input-color-panel);
+        }
+
+        #edit--color:focus {
+          outline: none;
+          border:2px solid var(--button-color);
+        }
+      }
+
+      .textfield--edit--name {
+        margin-top: 12px;
+        width: 15vw;
+
+        #edit--name {
+          box-shadow: 0 0 5px var(--input-color-panel);
+          background-color: #fff;
+          border: var(--accent-color) 2px solid;
+        }
+
+        #edit--name:focus {
+          outline: none;
+          border:2px solid var(--button-color);
+        }
+      }
+
+      .div__edit__link {
+        display: flex;
+        justify-content: space-between;
+
+        .edit__link__button {
+          margin: 0;
+          border: none;
+          border-radius: 5px;
+          background-color: var(--button-color);
+          color: aliceblue;
+          cursor: pointer;
+        }
+
+        .edit__link__button:hover {
+          background-color: var(--button-color-hover);
+        }
+      }
+    }
+  }
+}
+
+@media (max-width: 1400px) {
+  #container {
+
+    .container__form {
+
+      #edit__form {
+
+        .div__edit__link {
+
+          .edit__link__button:nth-child(1) {
+            margin-right: 10px;
+          }
+        }
+
+        .textfield--edit--name {
+          width: 100%;
+        }
+      }
+    }
+  }
+}

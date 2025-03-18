@@ -1,24 +1,48 @@
+<header class="header__flower--tables">
+
+  <a class="link--flower__form" routerLink="/flower-create">
+    <button
+      size="s"
+      tuiButton
+      type="button"
+      class="flower__form__link__button"
+    >
+      Добавить
+    </button>
+  </a>
+
+</header>
+
 <div class="container">
   <div
     tuiAppearance="floating"
     tuiCardLarge
-    class="flower-card"
+    class="flower--card"
     *ngFor="let flower of flowers$ | async"
   >
+
     <header tuiHeader>
       <h1 tuiTitle>
         {{ flower.name }}
         <span tuiSubtitle>{{ flower.color }}</span>
         <span tuiSubtitle>{{ flower.price | currency}}</span>
       </h1>
+
+      <button
+        tuiButtonClose
+        tuiIconButton
+        type="button"
+        (click)="deleteFlower(flower)"
+      ></button>
     </header>
 
-    <footer class="buttons-flower-card">
+    <footer class="buttons--flower--card">
       <button
         appearance="secondary"
         size="m"
         tuiButton
         type="button"
+        class="button--buy"
       >
         Купить
       </button>
@@ -27,54 +51,11 @@
         size="m"
         tuiButton
         type="button"
-        (click)="showSelectModal(flower)"
+        class="button--edit"
+        (click)="getSelectedFlower(flower)"
       >
         Изменить
       </button>
-
-      <ng-template
-        let-observer
-        [tuiDialogOptions]="{label: 'Измени как душе угодно', size: 's'}"
-        [(tuiDialog)]="open"
-      >
-
-        <form
-          [formGroup]="editForm"
-          (ngSubmit)="observer.complete()"
-        >
-          <tui-input
-            tuiAutoFocus
-            formControlName="name"
-            class="tui-input-name"
-          >
-            Name:
-          </tui-input>
-          <tui-input
-            formControlName="color"
-            class="tui-input-color"
-          >
-            Color:
-          </tui-input>
-          <tui-input
-            formControlName="price"
-            class="tui-input-price"
-          >
-            Price:
-          </tui-input>
-          <p>
-            <button
-              size="m"
-              tuiButton
-              type="submit"
-              *ngIf="flower.id !== undefined"
-              (click)="updateFlower(flower.id)"
-            >
-              Изменить
-            </button>
-          </p>
-        </form>
-      </ng-template>
-
     </footer>
   </div>
 </div>

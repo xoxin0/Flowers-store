@@ -5,11 +5,31 @@
   --input-color-panel: #e0e0e9;
 }
 
+.header__flower--form {
+  padding: 20px;
+  display: flex;
+  justify-content: flex-end;
+  background-color: #9d55e5;
+
+  .flower--table__link {
+    margin-right: 20vw;
+
+    .flower--table__link__button {
+      font-weight: bold;
+      background-color: var(--button-color);
+    }
+
+    .flower--table__link__button:hover {
+      background-color: var(--button-color-hover);
+    }
+  }
+}
+
 #form {
   display: flex;
   justify-content: center;
 
-  .form-block {
+  .form--block {
     display: flex;
     align-items: center;
     justify-content: center;
@@ -22,8 +42,7 @@
       border: var(--accent-color) 2px solid;
     }
 
-    .form-color {
-      margin-top: 12px;
+    .form--color {
 
       #color {
         background-color: #fff;
@@ -37,7 +56,7 @@
       }
     }
 
-    .form-name {
+    .form--name {
       margin-top: 12px;
       width: 15vw;
 
@@ -53,40 +72,36 @@
       }
     }
 
-    .button-submit {
-        margin-top: 10px;
-        height: 4vh;
-        width: 4vw;
-        border: none;
-        border-radius: 5px;
-        background-color: var(--button-color);
-        color: aliceblue;
-        cursor: pointer;
-    }
-
-    .button-submit:hover {
-        background-color: var(--button-color-hover);
-    }
-  }
-}
-
-.header-flower-form {
-  padding: 20px;
-  display: flex;
-  justify-content: flex-end;
-  background-color: #9d55e5;
-
-  .flower-table-link {
-    margin-right: 20vw;
-    .flower-table-link-button {
-      font-weight: bold;
+    .button--submit {
+      align-self: flex-end;
+      margin-top: 10px;
+      height: 15%;
+      width: 37%;
+      border: none;
+      border-radius: 5px;
       background-color: var(--button-color);
+      color: aliceblue;
+      cursor: pointer;
     }
 
-    .flower-table-link-button:hover {
+    .button--submit:hover {
       background-color: var(--button-color-hover);
     }
   }
 }
 
+@media (max-width: 1400px) {
+  #form {
 
+    .form--block {
+
+      .button--submit {
+        width: 45%;
+      }
+
+      .form--name {
+        width: 100%;
+      }
+    }
+  }
+}
