@@ -1,8 +1,36 @@
+@use '../common/style' as *;
+
 #container {
+  @include form-container;
 
   .container__form {
+    @include form-block;
 
     #edit__form {
+
+      .textfield--edit--name {
+        @include form-name-size;
+
+        #edit--name {
+          @include name;
+        }
+
+        #edit--name:focus {
+          @include name-focus;
+        }
+      }
+
+      #edit--color {
+        @include color;
+      }
+
+      #edit--color:focus {
+        @include color-focus;
+      }
+
+      #edit--price {
+        @include price;
+      }
 
       .textfield--edit--price {
         margin-top: 12px;
@@ -21,13 +49,13 @@
           margin: 0;
           border: none;
           border-radius: 5px;
-          background-color: var(--button-color);
+          background-color: $button-color;
           color: aliceblue;
           cursor: pointer;
         }
 
         .edit__link__button:hover {
-          background-color: var(--button-color-hover);
+          background-color: $button-color-hover;
         }
       }
     }

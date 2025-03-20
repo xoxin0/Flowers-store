@@ -2,7 +2,7 @@ import {
   Component,
   OnInit,
   ChangeDetectionStrategy,
-  inject,
+  inject, OnDestroy,
 } from '@angular/core';
 
 import {
@@ -78,7 +78,7 @@ export class FlowersTableComponent implements OnInit {
   }
 
   public giveSelectedFlower() {
-    this._transferSelectedFlowerService.selectedFlower
+    this._transferSelectedFlowerService.selectedFlower$
       .subscribe({
         next: flower => {
           flower.id = this.selectedFlower.id

@@ -1,3 +1,5 @@
+@use '../common/style' as *;
+
 .header__flower--form {
   padding: 20px;
   display: flex;
@@ -9,19 +11,44 @@
 
     .flower--table__link__button {
       font-weight: bold;
-      background-color: var(--button-color);
+      background-color: $button-color;
     }
 
     .flower--table__link__button:hover {
-      background-color: var(--button-color-hover);
+      background-color: $button-color-hover;
     }
   }
 }
 
 #form {
+  @include form-container;
 
   .form--block {
+    @include form-block;
 
+    #price {
+      @include price;
+    }
+
+    #color {
+      @include color;
+    }
+
+    #color:focus {
+      @include color-focus;
+    }
+
+    .form--name {
+      @include form-name-size;
+
+      #name {
+        @include name;
+      }
+
+      #name:focus {
+        @include name-focus;
+      }
+    }
     .button--submit {
       align-self: flex-end;
       margin-top: 10px;
@@ -29,13 +56,13 @@
       width: 37%;
       border: none;
       border-radius: 5px;
-      background-color: var(--button-color);
+      background-color: $button-color;
       color: aliceblue;
       cursor: pointer;
     }
 
     .button--submit:hover {
-      background-color: var(--button-color-hover);
+      background-color: $button-color-hover;
     }
   }
 }

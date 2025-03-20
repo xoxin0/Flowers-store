@@ -8,7 +8,7 @@ import { BehaviorSubject } from 'rxjs';
 
 export class TransferSelectedFlowerService {
 
-  public selectedFlower = new BehaviorSubject<Flower>({
+  public selectedFlower$ = new BehaviorSubject<Flower>({
     id: 0,
     name: '',
     color: '',

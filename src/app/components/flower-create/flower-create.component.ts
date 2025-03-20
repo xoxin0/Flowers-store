@@ -45,7 +45,7 @@ import { inject } from '@angular/core';
     RouterLink
   ],
   templateUrl: './flower-create.component.html',
-  styleUrls: ['./flower-create.component.scss', '../common/create-edit-style.scss']
+  styleUrl: './flower-create.component.scss'
 })
 
 export class FlowerCreateComponent {
