@@ -1,6 +1,7 @@
 import {
   Component,
-  inject, OnDestroy,
+  inject,
+  OnDestroy,
   OnInit
 } from '@angular/core';
 
