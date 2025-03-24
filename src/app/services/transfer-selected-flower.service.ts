@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { Flower } from '../interfaces/flower';
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -7,10 +8,10 @@ import { Flower } from '../interfaces/flower';
 
 export class TransferSelectedFlowerService {
 
-  public selectedFlower: Flower = {
+  public selectedFlower$ = new BehaviorSubject<Flower>({
     id: 0,
     name: '',
     color: '',
-    price: 0,
-  };
+    price: 0
+  });
 }

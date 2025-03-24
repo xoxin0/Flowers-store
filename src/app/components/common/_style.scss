@@ -1,0 +1,50 @@
+$button-color: #7472f7;
+$accent-color: #aea7fa;
+$button-color-hover: #131196;
+$input-color-panel: #e0e0e9;
+
+@mixin form-container {
+  display: flex;
+  justify-content: center;
+}
+
+@mixin form-block {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+  width: 100vw;
+  height: 100vh;
+  background-color: $accent-color;
+}
+
+@mixin price {
+  border: $accent-color 2px solid;
+}
+
+@mixin color {
+  background-color: #fff;
+  border: $accent-color 2px solid;
+  box-shadow: 0 0 5px $input-color-panel;
+}
+
+@mixin color-focus {
+  outline: none;
+  border:2px solid $button-color;
+}
+
+@mixin name {
+  box-shadow: 0 0 5px $input-color-panel;
+  background-color: #fff;
+  border: $accent-color 2px solid;
+}
+
+@mixin name-focus {
+  outline: none;
+  border:2px solid $button-color;
+}
+
+@mixin form-name-size {
+  margin-top: 12px;
+  width: 15vw;
+}

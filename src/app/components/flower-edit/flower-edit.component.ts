@@ -1,6 +1,7 @@
 import {
   Component,
   inject,
+  OnDestroy,
   OnInit
 } from '@angular/core';
 
@@ -58,12 +59,12 @@ import { TransferSelectedFlowerService } from '../../services/transfer-selected-
   styleUrl: './flower-edit.component.scss'
 })
 
-export class FlowerEditComponent implements OnInit {
+export class FlowerEditComponent implements OnInit, OnDestroy {
 
   public selectedFlowerInEdit: Flower = {
     name: '',
     color: '',
-    price: 0,
+    price: 0
   };
 
   public editForm = new FormGroup({
@@ -77,12 +78,17 @@ export class FlowerEditComponent implements OnInit {
   private _transferSelectedFlowerService = inject(TransferSelectedFlowerService);
 
   ngOnInit() {
-     this.selectedFlowerInEdit = {...this._transferSelectedFlowerService.selectedFlower};
+     this.selectedFlowerInEdit = this._transferSelectedFlowerService.selectedFlower$.getValue();
      this.editForm.setValue({
            name: this.selectedFlowerInEdit.name,
            color: this.selectedFlowerInEdit.color,
            price: this.selectedFlowerInEdit.price
-     })
+     });
+  }
+
+  ngOnDestroy() {
+    this._transferSelectedFlowerService.selectedFlower$
+      .unsubscribe();
   }
 
   public updateFlower(): void {

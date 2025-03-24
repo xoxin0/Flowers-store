@@ -2,7 +2,7 @@ import {
   Component,
   OnInit,
   ChangeDetectionStrategy,
-  inject,
+  inject
 } from '@angular/core';
 
 import {
@@ -14,12 +14,8 @@ import {
 import {
   AsyncPipe,
   CurrencyPipe,
-  NgForOf,
+  NgForOf
 } from '@angular/common';
-
-import {
-  ReactiveFormsModule
-} from '@angular/forms';
 
 import {
   TuiCardLarge,
@@ -31,22 +27,19 @@ import {
   RouterLink
 } from '@angular/router';
 
-import { MatButtonModule } from '@angular/material/button';
-import { MatCardModule } from '@angular/material/card';
+import { ReactiveFormsModule } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { TuiInputModule } from '@taiga-ui/legacy';
 import { GetAllFlowerService } from '../../services/get-all-flower.service';
 import { Flower } from '../../interfaces/flower';
 import { TuiButtonClose } from '@taiga-ui/kit';
 import { DeleteFlowerService } from '../../services/delete-flower.service';
-import {TransferSelectedFlowerService} from '../../services/transfer-selected-flower.service';
+import { TransferSelectedFlowerService } from '../../services/transfer-selected-flower.service';
 
 @Component({
   selector: 'app-flowers-table',
   imports: [
     NgForOf,
-    MatCardModule,
-    MatButtonModule,
     AsyncPipe,
     CurrencyPipe,
     TuiTitle,
@@ -57,7 +50,7 @@ import {TransferSelectedFlowerService} from '../../services/transfer-selected-fl
     ReactiveFormsModule,
     TuiInputModule,
     RouterLink,
-    TuiButtonClose,
+    TuiButtonClose
   ],
   templateUrl: './flowers-table.component.html',
   styleUrl: './flowers-table.component.scss',
@@ -70,7 +63,7 @@ export class FlowersTableComponent implements OnInit {
     id: 0,
     name: '',
     color: '',
-    price: 0,
+    price: 0
   };
 
   public flowers$: Observable<Flower[]> = new Observable();
@@ -85,7 +78,16 @@ export class FlowersTableComponent implements OnInit {
   }
 
   public giveSelectedFlower() {
-    this._transferSelectedFlowerService.selectedFlower = {...this.selectedFlower};
+    this._transferSelectedFlowerService.selectedFlower$
+      .subscribe({
+        next: flower => {
+          flower.id = this.selectedFlower.id
+          flower.name = this.selectedFlower.name;
+          flower.color = this.selectedFlower.color;
+          flower.price = this.selectedFlower.price;
+        }
+      });
+
     this._router.navigate(['/flower-edit'])
       .then(r => console.debug(r));
   }
@@ -104,6 +106,6 @@ export class FlowersTableComponent implements OnInit {
     this._deleteFlowerService.deleteFlowerInDataBase(flower.id!)
       .subscribe();
 
-    window.location.reload();
+    this.loadFlowers();
   }
 }
