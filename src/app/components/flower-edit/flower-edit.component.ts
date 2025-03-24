@@ -56,7 +56,7 @@ import { TransferSelectedFlowerService } from '../../services/transfer-selected-
     TuiTitle
   ],
   templateUrl: './flower-edit.component.html',
-  styleUrls: ['./flower-edit.component.scss']
+  styleUrl: './flower-edit.component.scss'
 })
 
 export class FlowerEditComponent implements OnInit, OnDestroy {
@@ -64,7 +64,7 @@ export class FlowerEditComponent implements OnInit, OnDestroy {
   public selectedFlowerInEdit: Flower = {
     name: '',
     color: '',
-    price: 0,
+    price: 0
   };
 
   public editForm = new FormGroup({

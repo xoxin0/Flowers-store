@@ -2,7 +2,7 @@ import {
   Component,
   OnInit,
   ChangeDetectionStrategy,
-  inject,
+  inject
 } from '@angular/core';
 
 import {
@@ -14,7 +14,7 @@ import {
 import {
   AsyncPipe,
   CurrencyPipe,
-  NgForOf,
+  NgForOf
 } from '@angular/common';
 
 import {
@@ -50,7 +50,7 @@ import { TransferSelectedFlowerService } from '../../services/transfer-selected-
     ReactiveFormsModule,
     TuiInputModule,
     RouterLink,
-    TuiButtonClose,
+    TuiButtonClose
   ],
   templateUrl: './flowers-table.component.html',
   styleUrl: './flowers-table.component.scss',
@@ -63,7 +63,7 @@ export class FlowersTableComponent implements OnInit {
     id: 0,
     name: '',
     color: '',
-    price: 0,
+    price: 0
   };
 
   public flowers$: Observable<Flower[]> = new Observable();
@@ -106,6 +106,6 @@ export class FlowersTableComponent implements OnInit {
     this._deleteFlowerService.deleteFlowerInDataBase(flower.id!)
       .subscribe();
 
-    window.location.reload();
+    this.loadFlowers();
   }
 }
